@@ -1,0 +1,22 @@
+
+1. The following SQL scripts must be run when connected to SYS
+conn / as sysdba
+
+2. Setting up the database for running Java
+@?/javavm/install/initjvm.sql
+
+3. Creating KT_COMPRESS package for uncompressing ZIP data
+@@ktcomp.sql
+
+4. Creating the main KT_UNWRAP package for unwrapping PL/SQL
+@@ktunwrap.sql
+
+5. Demonstrations of how to use this package
+set pages 0 line 100 wrap on feed off
+select * from table(kt_unwrap.unwrap('DBMS_FLASHBACK'));
+select * from table(kt_unwrap.unwrap('DBMS_UTL_COLL_LIB','LIBRARY'));
+select * from table(kt_unwrap.unwrap(upper('wri$_adv_hdm_t'),'TYPE BODY','SYS'));
+
+
+
+-fin-
