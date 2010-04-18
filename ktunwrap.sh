@@ -15,10 +15,10 @@ B449445A1DF0009621807F1A82394FC1A7D70DD1D8FF139370EE5BEFBE09B977
 6202AE88FCAA4208A64557D39ABDE1238D924A1189746B91FBFEC901EA1BF7CE"| \
 while read -n2 f;do [ -n "$f" ] && printf '\%03o' "0x$f";done)
 exec 3<&0 4>&1 <$IF >$OF
-sed -n -e '/ wrapped[ ]*$/,/^\/$/p'| \
-sed -n -e '21,/^[[:space:]]*$/p'| \
+sed -n -e '/ wrapped[ ]*$/,/^[[:blank:]]*$/p'| \
+sed -n -e '21,$p'| \
 base64 -d -i| \
-sed '1s/.\{20\}\(.*\)/\1/'| \
+dd bs=1 skip=20 status=noxfer 2>/dev/null| \
 tr "$F8" "$T8"| \
 perl -e '
 use strict;
